@@ -1,5 +1,0 @@
-/* Small style tweaks for added UI elements */
-:root[data-theme="dark"]{--bg:#080b10;}
-:root[data-theme="light"]{--bg:#f5f8fc;}
-.pill-btn, select.pill-btn{padding:8px 12px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--muted);font-weight:700}
-#uiLang{appearance:none}
