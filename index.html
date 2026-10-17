@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -39,30 +39,23 @@
       <span data-i18n="tab.generator">Generator</span>
     </button>
     <button class="tab" data-view="corpus">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
       <span data-i18n="tab.corpus">Corpus</span>
     </button>
     <button class="tab" data-view="templates">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       <span data-i18n="tab.templates">Templates</span>
     </button>
     <button class="tab" data-view="help">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       <span data-i18n="tab.help">Panduan</span>
     </button>
   </nav>
   <div class="top-actions">
     <button id="themeBtn" class="icon-btn" title="Toggle theme">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
     </button>
-    <!-- UI language selector (replaces single button) -->
-    <select id="uiLang" class="pill-btn" title="Interface language">
-      <option value="id">ID</option>
-      <option value="en">EN</option>
-      <option value="es">ES</option>
-      <option value="fr">FR</option>
-      <option value="de">DE</option>
-    </select>
+    <button id="langBtn" class="pill-btn">EN</button>
   </div>
 </header>
 
@@ -76,37 +69,29 @@
     <div class="grid">
       <label><span data-i18n="f.topic">Topik Dataset</span>
         <select id="topic">
-          <option value="code" data-i18n="topic.code">Code / Pemrograman</option>
-          <option value="document" data-i18n="topic.document">Document / Dokumen</option>
-          <option value="article" data-i18n="topic.article">Article / Artikel</option>
-          <option value="conversation" data-i18n="topic.conversation">Conversation / Percakapan</option>
-          <option value="qa" data-i18n="topic.qa">Q&amp;A / Tanya-Jawab</option>
-          <option value="product" data-i18n="topic.product">Product / Ulasan Produk</option>
-          <option value="news" data-i18n="topic.news">News / Berita</option>
-          <option value="tutorial" data-i18n="topic.tutorial">Tutorial / Panduan</option>
-          <option value="general" data-i18n="topic.general">General</option>
+          <option value="code">Code / Pemrograman</option>
+          <option value="document">Document / Dokumen</option>
+          <option value="article">Article / Artikel</option>
+          <option value="conversation">Conversation / Percakapan</option>
+          <option value="qa">Q&amp;A / Tanya-Jawab</option>
+          <option value="product">Product / Ulasan Produk</option>
+          <option value="news">News / Berita</option>
+          <option value="tutorial">Tutorial / Panduan</option>
+          <option value="general">Umum</option>
         </select>
       </label>
       <label><span data-i18n="f.lang">Bahasa Output</span>
         <select id="lang">
           <option value="id">Indonesia</option>
           <option value="en">English</option>
-          <option value="mix">Mixed (ID + EN)</option>
-          <option value="es">Español</option>
-          <option value="fr">Français</option>
-          <option value="de">Deutsch</option>
-          <option value="pt">Português</option>
-          <option value="zh">中文</option>
-          <option value="ja">日本語</option>
-          <option value="ru">Русский</option>
-          <option value="ar">العربية</option>
+          <option value="mix">Campuran (ID + EN)</option>
         </select>
       </label>
       <label><span data-i18n="f.source">Sumber Teks</span>
         <select id="sourceMode">
-          <option value="synthetic" data-i18n="source.synthetic">Synthetic (template)</option>
-          <option value="hybrid" data-i18n="source.hybrid">Hybrid (corpus + template)</option>
-          <option value="corpus" data-i18n="source.corpus">Corpus only</option>
+          <option value="synthetic">Sintetis (template)</option>
+          <option value="hybrid">Hybrid (korpus + template)</option>
+          <option value="corpus">Korpus saja</option>
         </select>
       </label>
       <label><span data-i18n="f.tokens">Target Token (total)</span>
@@ -137,7 +122,7 @@
       <div class="grid">
         <label style="grid-column:1/-1">
           <span data-i18n="f.labelTemplate">Template Label (JSON / JSONL)</span>
-          <textarea id="labelTemplate" rows="4" spellcheck="false" placeholder='{"text":""}'></textarea>
+          <textarea id="labelTemplate" rows="4" spellcheck="false" placeholder='{"text":""}&#10;atau&#10;{"instruction":"","output":""}&#10;atau&#10;{"messages":[{"role":"user","content":"{sentence}"},{"role":"assistant","content":"{paragraph}"}]}'></textarea>
         </label>
         <label><span data-i18n="f.quantity">Jumlah Entri</span>
           <input type="number" id="labelQuantity" value="100" min="1" max="1000000">
@@ -150,19 +135,9 @@
   <div class="card">
     <h2 data-i18n="sec.quality">Kontrol Kualitas &amp; Anti-Duplikat</h2>
     <div class="grid">
-      <label><span data-i18n="f.dupMethod">Duplicate Method</span>
-        <select id="dupMethod">
-          <option value="simhash">SimHash (fast)</option>
-          <option value="minhash">MinHash (jaccard)</option>
-          <option value="hybrid">Hybrid</option>
-        </select>
-      </label>
-      <label><span data-i18n="f.dupThreshold">Duplicate Threshold</span>
-        <input type="number" id="dupThreshold" value="0.8" min="0" max="1" step="0.01">
-      </label>
-      <label><span data-i18n="f.nearDist">Near-Duplicate (Hamming)</span><input type="number" id="nearDist" value="4" min="0" max="20"></label>
-      <label><span data-i18n="f.minUniq">Min. Unique-Word Ratio</span><input type="number" id="minUniq" value="0.55" min="0.1" max="1" step="0.05"></label>
-      <label><span data-i18n="f.maxRetry">Max Retry per Record</span><input type="number" id="maxRetry" value="15" min="1" max="100"></label>
+      <label><span>Near-Duplicate (Hamming)</span><input type="number" id="nearDist" value="4" min="0" max="20"></label>
+      <label><span>Min. Unique-Word Ratio</span><input type="number" id="minUniq" value="0.55" min="0.1" max="1" step="0.05"></label>
+      <label><span>Max Retry per Record</span><input type="number" id="maxRetry" value="15" min="1" max="100"></label>
       <label><span data-i18n="f.onfail">Kalau gagal unik?</span>
         <select id="onFail"><option value="skip">Lewati</option><option value="accept">Terima</option></select>
       </label>
@@ -205,7 +180,7 @@
     </div>
     <div class="row-btn" style="margin-top:12px">
       <label class="btn-upload">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
         <span data-i18n="btn.uploadMem">Upload JSON / JSONL / ZIP</span>
         <input type="file" id="uploadInput" accept=".json,.jsonl,.zip" multiple hidden>
       </label>
@@ -244,10 +219,171 @@
 
 </section>
 
-<!-- Remaining sections unchanged -->
+<!-- ================= CORPUS ================= -->
+<section id="view-corpus" class="view" hidden>
+
+  <div class="card">
+    <h2 data-i18n="sec.corpusRelease">Corpus dari GitHub Releases</h2>
+    <p class="hint" style="margin-top:0">Sumber: <code class="k">github.com/azrielspace852-wq/corpus/releases</code>. Pola: <code class="k">corpus-&lt;lang&gt;-&lt;id&gt;</code></p>
+    <div class="row-btn" style="margin-top:10px">
+      <button class="btn-ghost" id="refreshCorpusBtn" data-i18n="btn.refresh">Refresh</button>
+      <button class="btn-primary" id="loadAllCorpusBtn" data-i18n="btn.loadAll">Load Semua</button>
+      <span class="badge" id="releaseBadge">memuat…</span>
+    </div>
+    <div id="corpusLog" class="log-box" style="display:none"></div>
+  </div>
+
+  <div class="card">
+    <h2 data-i18n="sec.corpusStored">Corpus Tersimpan</h2>
+    <div class="stats">
+      <div class="stat"><b id="cTotal">0</b><span>Corpus</span></div>
+      <div class="stat"><b id="cTexts">0</b><span>Total Teks</span></div>
+      <div class="stat"><b id="cLangs">0</b><span>Bahasa</span></div>
+    </div>
+    <div class="row-btn" style="margin-top:12px">
+      <button class="btn-ghost" id="clearAllCorpusBtn" data-i18n="btn.clearAllCorpus">Hapus Semua Corpus</button>
+    </div>
+    <div id="corpusStoredGrid" class="corpus-grid" style="margin-top:14px"></div>
+  </div>
+
+  <div class="card">
+    <h2 data-i18n="sec.corpusUpload">Upload Corpus Manual (Multi-File)</h2>
+    <div class="row-btn">
+      <label class="btn-upload">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span data-i18n="btn.pickFiles">Pilih File (.json / .jsonl / .zip / .txt)</span>
+        <input type="file" id="corpusUpload" accept=".json,.jsonl,.zip,.txt" multiple hidden>
+      </label>
+    </div>
+    <div class="grid" style="margin-top:12px">
+      <label><span data-i18n="f.corpusLang">Bahasa (untuk .txt)</span>
+        <select id="corpusUploadLang"><option value="id">Indonesia (id)</option><option value="en">English (en)</option></select>
+      </label>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================= TEMPLATES ================= -->
+<section id="view-templates" class="view" hidden>
+
+  <div class="card">
+    <h2 data-i18n="sec.tplRelease">Template dari GitHub Releases</h2>
+    <p class="hint" style="margin-top:0">Pola: <code class="k">template-&lt;lang&gt;-&lt;id&gt;</code>. Setiap baris dalam file adalah satu template.</p>
+    <div class="row-btn" style="margin-top:10px">
+      <button class="btn-ghost" id="refreshTplBtn" data-i18n="btn.refresh">Refresh</button>
+      <button class="btn-primary" id="loadAllTplBtn" data-i18n="btn.loadAll">Load Semua</button>
+      <span class="badge" id="tplReleaseBadge">memuat…</span>
+    </div>
+    <div id="tplLog" class="log-box" style="display:none"></div>
+  </div>
+
+  <div class="card">
+    <h2 data-i18n="sec.tplStored">Template Tersimpan</h2>
+    <div class="stats">
+      <div class="stat"><b id="tTotal">0</b><span>Bundle</span></div>
+      <div class="stat"><b id="tLines">0</b><span>Total Baris</span></div>
+      <div class="stat"><b id="tLangs">0</b><span>Bahasa</span></div>
+    </div>
+    <div class="row-btn" style="margin-top:12px">
+      <button class="btn-ghost" id="clearAllTplBtn" data-i18n="btn.clearAllTpl">Hapus Semua Template</button>
+    </div>
+    <div id="tplStoredGrid" class="corpus-grid" style="margin-top:14px"></div>
+  </div>
+
+  <div class="card">
+    <h2 data-i18n="sec.tplUpload">Upload Template Manual (Multi-File)</h2>
+    <div class="row-btn">
+      <label class="btn-upload">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span data-i18n="btn.pickTplFiles">Pilih File (.txt / .json / .jsonl / .zip)</span>
+        <input type="file" id="tplUpload" accept=".txt,.json,.jsonl,.zip" multiple hidden>
+      </label>
+    </div>
+    <div class="grid" style="margin-top:12px">
+      <label><span data-i18n="f.tplLang">Bahasa (untuk file tanpa info)</span>
+        <select id="tplUploadLang"><option value="id">Indonesia (id)</option><option value="en">English (en)</option></select>
+      </label>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 data-i18n="sec.tplCustom">Template Tambahan (Manual / Quick Edit)</h2>
+    <p class="hint" style="margin-top:0">Satu template per baris. Mendukung placeholder yang sama. Contoh: <code class="k">{Noun} ini {verb} {noun} dengan cara yang {adj}.</code></p>
+    <textarea id="customTemplates" rows="8" placeholder="Tulis template tambahan di sini, satu per baris…"></textarea>
+    <div class="row-btn" style="margin-top:10px">
+      <button class="btn-primary" id="applyTemplatesBtn" data-i18n="btn.applyTpl">Simpan &amp; Aktifkan</button>
+      <label class="btn-upload">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <span data-i18n="btn.importTxt">Impor dari .txt</span>
+        <input type="file" id="templateUpload" accept=".txt" hidden>
+      </label>
+      <button class="btn-ghost" id="clearTemplatesBtn" data-i18n="btn.clear">Kosongkan</button>
+      <span class="badge" id="tplBadge">0 aktif</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================= HELP ================= -->
+<section id="view-help" class="view" hidden>
+  <div class="card">
+    <h2 data-i18n="help.title">Panduan Lengkap</h2>
+    <div class="help-content">
+
+      <h3>1. Generator</h3>
+      <p><b>Konfigurasi Dataset</b> — pilih topik, bahasa output, sumber teks, target token, jumlah file, format (JSON/JSONL), dan prefix nama file.</p>
+      <p><b>Sumber Teks</b> — <i>Sintetis</i> memakai template bawaan. <i>Hybrid</i> menggabungkan korpus + template. <i>Korpus saja</i> murni dari korpus yang sudah dimuat.</p>
+
+      <h3>2. Mode Output</h3>
+      <p><b>Kolom Kustom</b> — bangun struktur JSON via field builder. Tersedia presets (Instruction, Chat, Dokumen, Klasifikasi, Q&amp;A, Code). Setiap field mendukung tipe nilai dan template placeholder.</p>
+      <p><b>Label JSON Kustom</b> — tulis sendiri template JSON/JSONL, lalu isi <b>Jumlah Entri</b>. Kosongkan nilai string (<code>""</code>) untuk auto-fill berdasarkan nama key. Contoh:</p>
+      <pre class="code-block">{"text":""}
+{"instruction":"","output":""}
+{"messages":[{"role":"user","content":"{sentence}"},{"role":"assistant","content":"{paragraph}"}]}</pre>
+      <p>Anda juga bisa menyisipkan placeholder seperti <code>{sentence}</code>, <code>{paragraph}</code>, <code>{title}</code>, <code>{code}</code>, <code>{number:1-100}</code>, <code>{uuid}</code>, <code>{date}</code>, dsb.</p>
+
+      <h3>3. Kontrol Kualitas</h3>
+      <p><b>Near-Duplicate</b> — ambang jarak Hamming (0–20). Semakin besar = semakin longgar pengecekan duplikat.</p>
+      <p><b>Min. Unique-Word Ratio</b> — rasio minimal kata unik per teks. Teks di bawah ambang akan ditolak.</p>
+      <p><b>Max Retry</b> — batas percobaan membuat record unik sebelum menyerah.</p>
+
+      <h3>4. Struktur Kolom (Field Builder)</h3>
+      <p>Setiap baris = satu kolom di output. Kolom <i>Nama Kolom</i> menentukan key JSON. Kolom <i>Tipe</i> menentukan generator nilai otomatis. Kolom <i>Template</i> opsional — jika diisi, nilainya dirender dari template.</p>
+      <p>Jika nama kolom dikenali (id, uuid, email, url, question, answer, label, dst.), tipe <code>auto</code> akan otomatis menyesuaikan.</p>
+
+      <h3>5. Memori Duplikat</h3>
+      <p>Upload file JSON/JSONL/ZIP untuk diambil fingerprint-nya. Fingerprint disimpan di IndexedDB agar bertahan antar sesi. Semua generate berikutnya akan menghindari fingerprint ini.</p>
+
+      <h3>6. Corpus Library</h3>
+      <p><b>Dari GitHub Releases</b> — fetch otomatis asset dengan pola <code>corpus-&lt;lang&gt;-&lt;id&gt;</code>. Klik Load untuk mengunduh &amp; simpan ke perangkat.</p>
+      <p><b>Upload Manual</b> — pilih <b>banyak file sekaligus</b>. Mendukung .json, .jsonl, .zip, .txt.</p>
+
+      <h3>7. Template Library</h3>
+      <p>Konsep sama dengan Corpus, tapi pola filenya <code>template-&lt;lang&gt;-&lt;id&gt;</code> dan isinya satu template per baris. Template aktif akan dipakai sebagai basis kalimat sintetis.</p>
+      <p><b>Import Manual</b> — pilih banyak file .txt/.json/.jsonl/.zip. Baris yang dibaca akan digabung dengan template yang sudah ada.</p>
+
+      <h3>8. Download</h3>
+      <p>Jika hanya 1 file, hasil diunduh langsung (JSON atau JSONL). Jika &gt;1 file, otomatis dikemas menjadi ZIP.</p>
+
+      <h3>9. Tema &amp; Bahasa</h3>
+      <p>Klik tombol ☀/☾ di kanan atas untuk beralih Dark / Light. Klik tombol ID / EN untuk beralih bahasa antarmuka.</p>
+
+      <h3>10. Placeholder Reference</h3>
+      <div class="ph-grid">
+        <code>{i}</code><code>{uuid}</code><code>{ts}</code><code>{date}</code>
+        <code>{sentence}</code><code>{paragraph}</code><code>{title}</code><code>{code}</code>
+        <code>{word}</code><code>{name}</code><code>{email}</code><code>{url}</code>
+        <code>{number:1-100}</code><code>{bool}</code><code>{pick:a|b|c}</code><code>{topic}</code>
+        <code>{lang}</code><code>{corpus_sentence}</code><code>{corpus_paragraph}</code>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 </main>
 
-<script src="js/script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
