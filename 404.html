@@ -44,23 +44,73 @@
 
   <script>
     (function () {
-      if (location.pathname === '/' || location.pathname === '/index.html') {
-        return;
+      // Attempt to fetch the site's index.html and inline it so SPA routes work.
+      // Problem this fixes: when index.html is written into the 404 page via document.write,
+      // relative asset URLs (style.css, script.js) resolve against the current 404 URL path
+      // which leads to 404s for the CSS/JS. We fix this by trying multiple likely index paths
+      // and injecting a <base> tag pointing to the fetched index's directory before writing.
+
+      async function tryFetch(paths) {
+        for (const p of paths) {
+          try {
+            const resp = await fetch(p, { cache: 'no-store' });
+            if (resp && resp.ok) return { html: await resp.text(), url: p };
+          } catch (e) {
+            // ignore and try next
+          }
+        }
+        return null;
       }
 
-      fetch('/index.html', { cache: 'no-store' })
-        .then(function (response) {
-          if (!response.ok) throw new Error('index not found');
-          return response.text();
-        })
-        .then(function (html) {
-          document.open();
-          document.write(html);
-          document.close();
-        })
-        .catch(function () {
+      // Build candidate index locations to support both root and GitHub Pages (owner/repo) layouts
+      const candidates = [];
+      // 1) Try an index in the same repo base: /owner/repo/index.html (if path looks like /owner/repo/...)
+      (function () {
+        const parts = location.pathname.split('/').filter(Boolean); // removes empty
+        if (parts.length >= 2) {
+          candidates.push('/' + parts[0] + '/' + parts[1] + '/index.html');
+        }
+      })();
+      // 2) Try relative index next to current path
+      candidates.push('./index.html');
+      // 3) Fallback to absolute root
+      candidates.push('/index.html');
+
+      tryFetch(candidates).then(function (res) {
+        if (!res) {
           document.body.innerHTML = '<div class="container"><h1>404 — Halaman tidak ditemukan</h1><p>Halaman yang Anda cari tidak ditemukan.</p><p><a href="/">Kembali ke beranda</a></p></div>';
-        });
+          return;
+        }
+
+        let { html, url } = res;
+        // Derive base href from the fetched URL (directory containing index.html)
+        let base = './';
+        try {
+          const u = new URL(url, location.href);
+          const path = u.pathname;
+          base = u.origin + path.substring(0, path.lastIndexOf('/') + 1);
+        } catch (e) {
+          base = './';
+        }
+
+        // Inject <base> into the head so relative URLs in the inlined index resolve correctly
+        const headOpen = html.indexOf('<head');
+        if (headOpen !== -1) {
+          const insertPos = html.indexOf('>', headOpen);
+          if (insertPos !== -1) {
+            html = html.slice(0, insertPos + 1) + '<base href="' + base + '">' + html.slice(insertPos + 1);
+          }
+        } else {
+          // as a last resort, prepend base to the document
+          html = '<base href="' + base + '">' + html;
+        }
+
+        document.open();
+        document.write(html);
+        document.close();
+      }).catch(function () {
+        document.body.innerHTML = '<div class="container"><h1>404 — Halaman tidak ditemukan</h1><p>Halaman yang Anda cari tidak ditemukan.</p><p><a href="/">Kembali ke beranda</a></p></div>';
+      });
     })();
   </script>
 </body>
