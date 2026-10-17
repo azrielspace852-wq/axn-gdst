@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>404 — Halaman tidak ditemukan</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: #1f2937;
+      background: #f8fafc;
+      margin: 0;
+    }
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin: 0.5rem 0;
+    }
+    a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>404 — Halaman tidak ditemukan</h1>
+    <p>Halaman yang Anda cari tidak ditemukan.</p>
+    <p><a href="/">Kembali ke beranda</a></p>
+  </div>
+
+  <script>
+    (function () {
+      if (location.pathname === '/' || location.pathname === '/index.html') {
+        return;
+      }
+
+      fetch('/index.html', { cache: 'no-store' })
+        .then(function (response) {
+          if (!response.ok) throw new Error('index not found');
+          return response.text();
+        })
+        .then(function (html) {
+          document.open();
+          document.write(html);
+          document.close();
+        })
+        .catch(function () {
+          document.body.innerHTML = '<div class="container"><h1>404 — Halaman tidak ditemukan</h1><p>Halaman yang Anda cari tidak ditemukan.</p><p><a href="/">Kembali ke beranda</a></p></div>';
+        });
+    })();
+  </script>
+</body>
+</html>
